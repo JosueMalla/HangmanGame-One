@@ -1,0 +1,30 @@
+body{
+    font-family: 'Press Start 2P', cursive;
+}
+
+/*CSS for header*/
+
+header{
+    background-color: rgb(79, 198, 79);
+    width: 100%;
+}
+
+.header{
+    width: 60%;
+    position: relative;
+    margin: 0 auto 0 auto;
+}
+
+.logo-alura{
+    margin: 20px;
+    display: inline-block;
+}
+
+h1{
+    display: inline-block;
+    font-size: 25px;
+    color: black;
+    position: absolute;
+    right: 0;
+    top: 27px;
+}
