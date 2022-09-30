@@ -28,3 +28,81 @@ h1{
     right: 0;
     top: 27px;
 }
+
+/*CSS for Main*/
+
+.main{
+    height: 594px;
+    display: flex;
+    align-items: center;
+}
+
+/* CSS for buttons*/
+
+.buttons{
+    width: 30%;
+    height: auto;
+    margin: auto auto;
+}
+
+.button1{
+    height: 100px;
+    width: 100%;
+    margin: 10px;
+    font-family: 'Press Start 2P', cursive;
+    border-radius: 15px;
+}
+
+.button2{
+    height: 60px;
+    width: 100%;
+    margin: 0 10px;
+    font-family: 'Press Start 2P', cursive;
+    border-radius: 15px;
+}
+
+.button1, .button2{
+    border-style: dashed;
+}
+
+
+/*CSS Footer*/
+
+footer{
+    height: 75px;
+    background-color: rgb(0, 32, 60);
+    position: relative;
+    text-align: center;
+}
+
+.linkedin{
+    width: 20%;
+    display: inline-block;
+    cursor: pointer;
+}
+
+.github{
+    width: 20%;
+    display: inline-block;
+    cursor: pointer;
+}
+
+.social-logos{
+    width: 10%;
+    position: absolute;
+    top: 15px;
+    right: 5%;
+}
+
+footer > img{
+    width: 50px;
+    padding: 5px;
+    vertical-align: bottom;
+}
+
+.copyrigth{
+    color: wheat;
+    font-size: 13px;
+    font-family: monospace;
+}
+
