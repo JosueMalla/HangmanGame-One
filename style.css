@@ -2,7 +2,8 @@ body{
     font-family: 'Press Start 2P', cursive;
 }
 
-/*CSS for header*/
+/*CSS for header
+secondary color: rgb(79, 198, 79)*/
 
 header{
     background-color: #3cc8b6;
@@ -118,4 +119,3 @@ footer > img{
     font-size: 13px;
     font-family: monospace;
 }
-

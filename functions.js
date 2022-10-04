@@ -12,3 +12,5 @@ function GoHome(){
 function GoAddword(){
     window.location.href="addword.html";
 }
+
+//Functions for game

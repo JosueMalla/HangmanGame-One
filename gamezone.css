@@ -1,0 +1,47 @@
+/*---------------------------------------------------------------*/
+
+body{
+    height: 757px;
+    background: linear-gradient(to top left, rgb(0, 87, 163) 50%, rgb(0, 32, 60) );
+    font-family: 'Press Start 2P', cursive;
+}
+
+.main-game{
+    height: 100%;
+    width: auto;
+}
+
+.box1, .box2{
+    display: inline-block;
+    background-color: white;
+    font-family: 'Press Start 2P', cursive;
+}
+
+.box1{
+    width: 450px;
+    border-radius: 20px;
+    margin: 4% 10% 4% 15%;
+    background-image: url(media/fondogame.jpg);
+    border-width: 1px;
+    height: 540px;
+    border-style: solid;
+    box-shadow: 0 0 10px rgb(79, 198, 79), 0 0 20px #000000;
+    position: relative;
+}
+
+.box1 > img{
+    position: absolute;
+    width: 70%;
+    TOP: 85px;
+    left: 71px;
+}
+.box2{
+    width: 460px;
+    vertical-align: top;
+    margin: 4% 0;
+    height: 80%;
+}
+
+.key{
+    border: solid 0.1rem #000
+}
