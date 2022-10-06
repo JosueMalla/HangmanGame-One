@@ -11,14 +11,16 @@
     <body>
         <section class="main-game">
             <div class="box1">
-                <img src="media/base-madera.png">
-                <img src="media/soga-parte1.png">
-                <img src="media/cabeza-parte2.png">
-                <img src="media/torzo-parte3.png">
-                <img src="media/manoizq-parte4.png">
-                <img src="media/manoder-parte5.png">
-                <img src="media/pieizq-parte6.png">
-                <img src="media/pieder-parte7.png">
+                <div class="box-images">
+                    <img src="media/base-madera.png" class="part0">
+                    <img src="media/soga-parte1.png" class="part1">
+                    <img src="media/cabeza-parte2.png" class="part2">
+                    <img src="media/torzo-parte3.png" class="part3">
+                    <img src="media/manoizq-parte4.png" class="part4">
+                    <img src="media/manoder-parte5.png" class="part5">
+                    <img src="media/pieizq-parte6.png" class="part6">
+                    <img src="media/pieder-parte7.png" class="part7">
+                </div>
             </div>
             <div class="box2">
                 <p>Intentos restantes:</p>
@@ -54,7 +56,7 @@
                     <input type="button" class="key" value="M">
                 </div>
                 <div class="buttons">
-                    <button class="newgame-button">New game</button>
+                    <button class="newgame-button" onclick="startGame()">New game</button>
                     <button class="back-button" onclick="GoHome()">Back to Menu</button>
                 </div>
             </div>

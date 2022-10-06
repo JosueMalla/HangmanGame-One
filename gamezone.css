@@ -28,12 +28,13 @@ body{
     position: relative;
 }
 
-.box1 > img{
+.box-images > img{
     position: absolute;
     width: 70%;
     TOP: 85px;
     left: 71px;
 }
+
 .box2{
     width: 460px;
     vertical-align: top;
