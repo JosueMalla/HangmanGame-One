@@ -35,6 +35,32 @@ body{
     left: 71px;
 }
 
+.word-box{
+    position: absolute;
+    bottom: 30px;
+    left: 20px;
+    width: 400px;
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+}
+
+.letterbox{
+    resize: none;
+    opacity: 1;
+    border: none;
+    border-bottom: #3cc8b6 5px solid;
+    display: inline-block;
+    width: 35px;
+    background-color: transparent;
+    margin: 0 auto;
+    color: white;
+    font-size: 35px;
+    height: 40px;
+    padding: 0;
+    font-family: 'Press Start 2P', cursive;
+}
+
 .box2{
     width: 460px;
     vertical-align: top;
