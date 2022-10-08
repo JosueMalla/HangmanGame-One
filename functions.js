@@ -41,13 +41,12 @@ function ableButtons(ok){
 
 
 //Random word//
-function randomWord(){
+function randomWordF(){
     return WordList[(Math.round(Math.random()*(WordList.length-1)))];
 }
 
 //Limpiar
 function clean(){
-    
     part1.style.opacity = "0";
     part2.style.opacity = "0";
     part3.style.opacity = "0";
@@ -55,6 +54,13 @@ function clean(){
     part5.style.opacity = "0";
     part6.style.opacity = "0";
     part7.style.opacity = "0";
+    for(i=0;i<=26;i++){
+        const button = document.getElementById("key"+i);
+        button.style.background = "white";
+    }
+    trynumber = 0;
+    failnumber = 0;
+    randomWord = "";
 }
 
 function showpart(number){
@@ -83,6 +89,8 @@ function disablebutton(id, ok){
 //Creating boxes for letters
 function createboxes(word){
 
+    console.log("creando cajas");
+
     document.getElementById("word-box").innerHTML = ""; //clean the word box 
     const wordbox = document.getElementById("word-box")
 
@@ -97,6 +105,15 @@ function createboxes(word){
     console.log("funcion box")
 }
 
+function getKey(letterkey){
+    arrayLetters = ["Q","W","E","R","T","Y","U","I","O","P","A","S","D","F","G","H","J","K","L","Ñ","Z","X","C","V","B","N","M"]
+    for(i=0;i<arrayLetters.length;i++){
+        if(letterkey==arrayLetters[i]){
+            return i;
+        }
+    }
+}
+
 function getwords(evento){
     const activatedkey = evento.key.toLocaleUpperCase();
     if (activatedkey.match(/^[A-ZÑ]$/i)) {
@@ -105,23 +122,46 @@ function getwords(evento){
 }
 
 function gamelogic(activatedkey){
+
     console.log(activatedkey);
     
-    trynumber = trynumber + 1;
+    trynumber = trynumber + 1; //Trying counter
 
-    for(i=0;i<randomWord.length;i++){
-        if(activatedkey==randomWord.charAt(i)){
+    for(i=0;i<randomWord.length;i++){ //Compare letter activated with word's letters  
+        if(activatedkey==randomWord.charAt(i)){ 
             const guessbox = document.getElementById("letterbox"+i);
-            guessbox.textContent = randomWord.charAt(i);
+            guessbox.textContent = randomWord.charAt(i);  //show letter in the box
+            
             find = true;
         }
     }
-    if (find!=true){
+
+    
+    disablebutton("key"+getKey(activatedkey), true);
+
+    if (find!=true){ //This code execute if letter activated is not the same with any word's letter 
         failnumber = failnumber + 1;
-        console.log("xd");
         showpart(failnumber);
+        const letterbuttonfail = document.getElementById("key"+getKey(activatedkey))
+        letterbuttonfail.style.background = "#ff0000";
+    }else{
+        const letterbuttonright = document.getElementById("key"+getKey(activatedkey))
+        letterbuttonright.style.background = "#3cc8b6";
     }
     find = false;
+
+    if(failnumber>6){
+        alert("Perdiste")
+        finishgame();
+    }
+}
+
+function finishgame(){
+
+    ableButtons(true);
+    disablebutton("newg-button", false);
+    document.removeEventListener("keyup", getwords)
+
 }
 
 //starting game//
@@ -130,13 +170,13 @@ function startGame(){
     clean();
     part0.style.opacity = "1";
 
-    //generating word to be used
-    randomWord = randomWord();
-    console.log(randomWord);
-
     //disable new game button
     disablebutton("newg-button", true);
     ableButtons(false);
+
+    //generating word to be used
+    randomWord = randomWordF();
+    console.log(randomWord);
 
     createboxes(randomWord);
 
