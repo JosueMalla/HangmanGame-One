@@ -55,6 +55,25 @@ h1{
     border-radius: 15px;
 }
 
+#txtaddword{
+    resize: none;
+    display: block;
+    padding: 10px;
+    margin: 20px auto 5px auto;
+    width: 80%;
+    background-color: transparent;
+    border-radius: 8px;
+    color: white;
+    border-color: #3cc8b6;
+    font-size: 1.1em;
+}
+
+.txtaddwordclass::placeholder{
+    color: white;
+    font-weight: bold;
+    opacity: .8;
+}
+
 .button2{
     height: 60px;
     width: 100%;

@@ -1,10 +1,6 @@
 
 //Function for go to game zone
 
-function GoGame(){
-    window.location.href="gamezone.html";
-}
-
 function GoHome(){
     window.location.href="index.html";
 }
@@ -25,11 +21,63 @@ const part4 = document.querySelector(".part4");
 const part5 = document.querySelector(".part5");
 const part6 = document.querySelector(".part6");
 const part7 = document.querySelector(".part7");
-var randomWord;
+const attempts = document.getElementById("attempts");
+var randomWord = "";
 var trynumber = 0;
 var failnumber = 0;
+var winnumber = 0;
+x=0;
 
-//-------------------------------------------------------------------//
+array_Letters = ["Q","W","E","R","T","Y","U","I","O","P","A","S","D","F","G","H","J","K","L","Ñ","Z","X","C","V","B","N","M"];
+
+//-----------------------------------------------------------------------------------------------//
+
+function addwordbutton(){
+    if(x==0){
+        const button2 = document.querySelector("#button22");
+        document.getElementById('button22').style.height = "150px";
+        button2.style.heigth = "100px";
+        const wordt = document.createElement("textarea");
+        wordt.setAttribute("id", "txtaddword");
+        wordt.setAttribute("class", "txtaddwordclass");
+        wordt.setAttribute("rows", "1");
+        wordt.setAttribute("placeholder", "Enter only letters");
+        wordt.setAttribute("Maxlength", "9");
+        wordt.setAttribute("onkeyup", "if(event.keyCode == 13) addword()"); 
+        button2.appendChild(wordt);
+        x++;
+    }
+}
+
+function addword(){
+    word = document.getElementById("txtaddword").value;
+    word = word.toLocaleUpperCase();
+    for(i=0;i<word.length-1;i++){
+        subword = word.charAt(i);
+        if(subword.match(/^[A-ZÑ]$/i)){
+            ok = true;
+        }else{
+            ok = false;
+            break;
+        }
+        console.log(ok);
+    }
+
+    if(ok==true){
+        sessionStorage.setItem("saverandomword", word);
+        GoGame();
+    }else{
+        caja = document.getElementById("txtaddword");
+        document.getElementById("txtaddword").value = "";
+        caja.style="background-color: red; opacity: .5;"
+        
+    }
+    
+}
+
+function showattempts(numero){
+    attempts.textContent = numero;
+}
 
 //Function for activate letter buttons
 ableButtons(true);
@@ -47,19 +95,28 @@ function randomWordF(){
 
 //Limpiar
 function clean(){
-    part1.style.opacity = "0";
+    part1.style.opacity = "0"; //reboot hangman body
     part2.style.opacity = "0";
     part3.style.opacity = "0";
     part4.style.opacity = "0";
     part5.style.opacity = "0";
     part6.style.opacity = "0";
     part7.style.opacity = "0";
+    attempts.textContent = "";
+
+    //reboot letter list
+    array_Letters = ["Q","W","E","R","T","Y","U","I","O","P","A","S","D","F","G","H","J","K","L","Ñ","Z","X","C","V","B","N","M"];
+
+    //activate buttons
     for(i=0;i<=26;i++){
         const button = document.getElementById("key"+i);
         button.style.background = "white";
     }
+
+    //reboot data
     trynumber = 0;
     failnumber = 0;
+    winnumber = 0;
     randomWord = "";
 }
 
@@ -105,6 +162,7 @@ function createboxes(word){
     console.log("funcion box")
 }
 
+//Get and return the number key through letter
 function getKey(letterkey){
     arrayLetters = ["Q","W","E","R","T","Y","U","I","O","P","A","S","D","F","G","H","J","K","L","Ñ","Z","X","C","V","B","N","M"]
     for(i=0;i<arrayLetters.length;i++){
@@ -114,13 +172,22 @@ function getKey(letterkey){
     }
 }
 
+//Capture key activated on keyboard
 function getwords(evento){
     const activatedkey = evento.key.toLocaleUpperCase();
     if (activatedkey.match(/^[A-ZÑ]$/i)) {
-        gamelogic(activatedkey);
+        for(i=0;i<array_Letters.length;i++){
+            if(activatedkey==array_Letters[i]){
+                gamelogic(activatedkey);
+                array_Letters[i] = "-";
+                console.log(array_Letters);
+            }
+        }
     }
 }
 
+
+//Structure of how game works
 function gamelogic(activatedkey){
 
     console.log(activatedkey);
@@ -131,7 +198,8 @@ function gamelogic(activatedkey){
         if(activatedkey==randomWord.charAt(i)){ 
             const guessbox = document.getElementById("letterbox"+i);
             guessbox.textContent = randomWord.charAt(i);  //show letter in the box
-            
+            winnumber -=1;
+            console.log(winnumber)
             find = true;
         }
     }
@@ -139,23 +207,33 @@ function gamelogic(activatedkey){
     
     disablebutton("key"+getKey(activatedkey), true);
 
-    if (find!=true){ //This code execute if letter activated is not the same with any word's letter 
-        failnumber = failnumber + 1;
-        showpart(failnumber);
+    if (find!=true){ //This code execute if letter activated is not the same with any word's letter
+
+        failnumber = failnumber + 1; //failnumber counter
+        showpart(failnumber); //show part of hangman body
+
         const letterbuttonfail = document.getElementById("key"+getKey(activatedkey))
-        letterbuttonfail.style.background = "#ff0000";
+        letterbuttonfail.style.background = "#ff0000"; //set red bg to wrong letter
+        attempts.textContent = randomWord.length-failnumber+1; //show remaining attempts
     }else{
         const letterbuttonright = document.getElementById("key"+getKey(activatedkey))
-        letterbuttonright.style.background = "#3cc8b6";
+        letterbuttonright.style.background = "#3cc8b6"; //set green bg to rigth letter
     }
     find = false;
 
-    if(failnumber>6){
+    console.log(randomWord);
+    if(failnumber>randomWord.length){
         alert("Perdiste")
+        finishgame();
+    }
+
+    if(winnumber==0){
+        alert("ganaste");
         finishgame();
     }
 }
 
+//Finish the game through disable buttons key and enable new game button
 function finishgame(){
 
     ableButtons(true);
@@ -169,14 +247,20 @@ function startGame(){
     //claning 
     clean();
     part0.style.opacity = "1";
-
+    
     //disable new game button
     disablebutton("newg-button", true);
     ableButtons(false);
 
     //generating word to be used
-    randomWord = randomWordF();
+    if(randomWord==""){
+        randomWord = randomWordF();
+    }
+        
     console.log(randomWord);
+    attempts.textContent = randomWord.length-failnumber+1;
+
+    winnumber = randomWord.length;
 
     createboxes(randomWord);
 
@@ -185,3 +269,10 @@ function startGame(){
     console.log(Math.random());
 }
 
+function GoGame(){
+    window.location.href="gamezone.html";
+    if(sessionStorage.getItem("saverandomword")!=""){
+        randomWord = sessionStorage.getItem("saverandomword");
+        startGame();
+    }
+}
