@@ -12,7 +12,7 @@ function GoAddword(){
 //Functions for game
 
 const boximages = document.querySelector(".box-images");
-const WordList = ["JAVA", "PYTHON", "TOMORROW", "BOGOTA", "MACHALA", "ECUADOR", "DEVELOPER", "JUNIOR", "KEYBOARD"]
+const WordList = ["JAVA", "PYTHON", "TOMORROW", "BOGOTA", "MACHALA", "ECUADOR", "DEVELOPER", "JUNIOR", "KEYBOARD", "LAPTOP", "COMPUTER", "WINDOWS", "BEDROOM"]
 const part0 = document.querySelector(".part0");
 const part1 = document.querySelector(".part1");
 const part2 = document.querySelector(".part2");
@@ -43,8 +43,13 @@ function addwordbutton(){
         wordt.setAttribute("rows", "1");
         wordt.setAttribute("placeholder", "Enter only letters");
         wordt.setAttribute("Maxlength", "9");
-        wordt.setAttribute("onkeyup", "if(event.keyCode == 13) addword()"); 
         button2.appendChild(wordt);
+        const buttont = document.createElement("button");
+        buttont.setAttribute("id", "buttont");
+        buttont.setAttribute("class", "buttontclass");
+        buttont.setAttribute("onclick", "addword()");
+        buttont.innerHTML = "Guardar"
+        button2.appendChild(buttont);
         x++;
     }
 }
@@ -52,7 +57,7 @@ function addwordbutton(){
 function addword(){
     word = document.getElementById("txtaddword").value;
     word = word.toLocaleUpperCase();
-    for(i=0;i<word.length-1;i++){
+    for(i=0;i<word.length;i++){
         subword = word.charAt(i);
         if(subword.match(/^[A-ZÑ]$/i)){
             ok = true;
@@ -90,7 +95,14 @@ function ableButtons(ok){
 
 //Random word//
 function randomWordF(){
-    return WordList[(Math.round(Math.random()*(WordList.length-1)))];
+    randomWord = sessionStorage.getItem("saverandomword");
+
+    if(randomWord==""){
+        return WordList[(Math.round(Math.random()*(WordList.length-1)))];
+    }else{
+        return randomWord;
+    }
+    
 }
 
 //Limpiar
@@ -204,7 +216,11 @@ function gamelogic(activatedkey){
         }
     }
 
-    
+    if(failnumber==3&&randomWord.length>3&&Math.random()*10==1){
+        audio = document.getElementById("niunbrillo");
+        audio.play();
+    }
+
     disablebutton("key"+getKey(activatedkey), true);
 
     if (find!=true){ //This code execute if letter activated is not the same with any word's letter
@@ -223,13 +239,25 @@ function gamelogic(activatedkey){
 
     console.log(randomWord);
     if(failnumber>randomWord.length){
-        alert("Perdiste")
+        //alert("Perdiste")
+        audio = document.getElementById("audiolose");
+        audio.play();
+        for(i=0;i<randomWord.length;i++){
+            const guessbox = document.getElementById("letterbox"+i);
+            guessbox.style.color = "red";
+            guessbox.textContent = randomWord.charAt(i);
+        }
+        
         finishgame();
     }
 
     if(winnumber==0){
-        alert("ganaste");
+        //alert("ganaste");
+        audio = document.getElementById("audiowin");
+        audio.play();
         finishgame();
+        
+        
     }
 }
 
@@ -239,7 +267,7 @@ function finishgame(){
     ableButtons(true);
     disablebutton("newg-button", false);
     document.removeEventListener("keyup", getwords)
-
+    sessionStorage.setItem("saverandomword", "");
 }
 
 //starting game//
@@ -253,9 +281,7 @@ function startGame(){
     ableButtons(false);
 
     //generating word to be used
-    if(randomWord==""){
-        randomWord = randomWordF();
-    }
+    randomWord = randomWordF();
         
     console.log(randomWord);
     attempts.textContent = randomWord.length-failnumber+1;
@@ -271,8 +297,5 @@ function startGame(){
 
 function GoGame(){
     window.location.href="gamezone.html";
-    if(sessionStorage.getItem("saverandomword")!=""){
-        randomWord = sessionStorage.getItem("saverandomword");
-        startGame();
-    }
+    console.log("si1");
 }

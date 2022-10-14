@@ -66,12 +66,29 @@ h1{
     color: white;
     border-color: #3cc8b6;
     font-size: 1.1em;
+    white-space:nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    
 }
 
 .txtaddwordclass::placeholder{
     color: white;
     font-weight: bold;
     opacity: .8;
+}
+
+#buttont{
+    width: 30%;
+    height: 20%;
+    font-size: 13px;
+    color: black;
+    font-family: 'Press Start 2P', cursive;
+    background: #3cc8b6;
+    cursor: pointer;
+    margin-top: 5px;
+    border-color: white;
+    border-radius: 5px;
 }
 
 .button2{
