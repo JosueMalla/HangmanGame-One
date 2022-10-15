@@ -26,7 +26,6 @@ var randomWord = "";
 var trynumber = 0;
 var failnumber = 0;
 var winnumber = 0;
-sessionStorage.setItem("saverandomword", "");
 x=0;
 
 array_Letters = ["Q","W","E","R","T","Y","U","I","O","P","A","S","D","F","G","H","J","K","L","Ñ","Z","X","C","V","B","N","M"];
@@ -97,6 +96,9 @@ function ableButtons(ok){
 //Random word//
 function randomWordF(){
     randomWord = sessionStorage.getItem("saverandomword");
+    if(randomWord==null){
+        randomWord = "";
+    }
 
     if(randomWord==""){
         return WordList[(Math.round(Math.random()*(WordList.length-1)))];
@@ -231,7 +233,7 @@ function gamelogic(activatedkey){
 
         const letterbuttonfail = document.getElementById("key"+getKey(activatedkey))
         letterbuttonfail.style.background = "#ff0000"; //set red bg to wrong letter
-        attempts.textContent = randomWord.length-failnumber+1; //show remaining attempts
+        attempts.textContent = 7-failnumber; //show remaining attempts
     }else{
         const letterbuttonright = document.getElementById("key"+getKey(activatedkey))
         letterbuttonright.style.background = "#3cc8b6"; //set green bg to rigth letter
@@ -239,7 +241,7 @@ function gamelogic(activatedkey){
     find = false;
 
     console.log(randomWord);
-    if(failnumber>randomWord.length){
+    if(failnumber>6){
         //alert("Perdiste")
         audio = document.getElementById("audiolose");
         audio.play();
@@ -284,7 +286,7 @@ function startGame(){
     //generating word to be used
     randomWord = randomWordF();
     console.log(randomWord);
-    attempts.textContent = randomWord.length-failnumber+1;
+    attempts.textContent = 7;
 
     winnumber = randomWord.length;
 
