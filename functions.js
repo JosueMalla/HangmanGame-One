@@ -26,6 +26,7 @@ var randomWord = "";
 var trynumber = 0;
 var failnumber = 0;
 var winnumber = 0;
+sessionStorage.setItem("saverandomword", "");
 x=0;
 
 array_Letters = ["Q","W","E","R","T","Y","U","I","O","P","A","S","D","F","G","H","J","K","L","Ñ","Z","X","C","V","B","N","M"];
@@ -282,7 +283,6 @@ function startGame(){
 
     //generating word to be used
     randomWord = randomWordF();
-        
     console.log(randomWord);
     attempts.textContent = randomWord.length-failnumber+1;
 

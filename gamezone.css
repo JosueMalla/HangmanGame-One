@@ -129,3 +129,45 @@ body{
     background-color: #45dfca;
     box-shadow: inset -1px -1px 2px rgb(0 0 0 / 20%), 4px 5px 7px rgb(0 0 0 / 20%);
 }
+
+@media screen and (max-width:580px){
+    .box1{
+        width: 350px;
+        height: 450px;
+        background-image: url(media/fondogamemobile2.jpg);
+        margin: 10% auto 10% auto;
+        display: block;
+    }
+
+    .box2{
+        width: 370px;
+        display: block;
+        margin: 0 auto;
+        height: 500px;
+        margin-bottom: 5%;
+    }
+
+    .buttons{
+        height: 15%;
+        margin-top: 5%;
+    }
+    
+    .word-box{
+        width: 315px;
+    }
+
+    .letterbox{
+        width: 25px;
+        font-size: 25px;
+    }
+
+    .box2 > p{
+        font-size: 15px;
+    }
+
+
+    .box-images > img{
+        top: 73px;
+        left: 75px;
+    }
+}
