@@ -48,7 +48,7 @@ function addwordbutton(){
         buttont.setAttribute("id", "buttont");
         buttont.setAttribute("class", "buttontclass");
         buttont.setAttribute("onclick", "addword()");
-        buttont.innerHTML = "Guardar"
+        buttont.innerHTML = "Save"
         button2.appendChild(buttont);
         x++;
     }
@@ -96,11 +96,11 @@ function ableButtons(ok){
 //Random word//
 function randomWordF(){
     randomWord = sessionStorage.getItem("saverandomword");
-    if(randomWord==null){
-        randomWord = "";
-    }
+    //if(randomWord==null){
+    //    randomWord = "";
+    //}
 
-    if(randomWord==""){
+    if(randomWord==""||randomWord==null){
         return WordList[(Math.round(Math.random()*(WordList.length-1)))];
     }else{
         return randomWord;
