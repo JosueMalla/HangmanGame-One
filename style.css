@@ -137,6 +137,13 @@ footer{
     cursor: pointer;
 }
 
+.insign{
+    width: 25%;
+    display: inline-block;
+    cursor: pointer;
+    align-items: center;
+}
+
 .social-logos{
     width: 10%;
     position: absolute;
