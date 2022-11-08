@@ -75,7 +75,6 @@ function addword(){
         caja = document.getElementById("txtaddword");
         document.getElementById("txtaddword").value = "";
         caja.style="background-color: red; opacity: .5;"
-        
     }
     
 }
@@ -245,12 +244,13 @@ function gamelogic(activatedkey){
         //alert("Perdiste")
         audio = document.getElementById("audiolose");
         audio.play();
+        alerta("You loose");
+
         for(i=0;i<randomWord.length;i++){
             const guessbox = document.getElementById("letterbox"+i);
             guessbox.style.color = "red";
             guessbox.textContent = randomWord.charAt(i);
         }
-        
         finishgame();
     }
 
@@ -258,10 +258,20 @@ function gamelogic(activatedkey){
         //alert("ganaste");
         audio = document.getElementById("audiowin");
         audio.play();
+        alerta("You win");
         finishgame();
         
         
     }
+}
+
+function alerta(text){
+    const texth = document.querySelector(".alert_class");
+    texth.textContent = text;
+    texth.classList.toggle("alerttextoff");
+    texth.classList.toggle("alerttext");
+    const body = document.querySelector(".main-game");
+    body.appendChild(texth)
 }
 
 //Finish the game through disable buttons key and enable new game button

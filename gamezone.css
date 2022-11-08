@@ -130,6 +130,22 @@ body{
     box-shadow: inset -1px -1px 2px rgb(0 0 0 / 20%), 4px 5px 7px rgb(0 0 0 / 20%);
 }
 
+.alerttextoff{
+    display: none;
+}
+
+.alerttext{
+    color: red;
+    position: absolute;
+    top: 40%;
+    left: 40%;
+    margin: 0 auto;
+    font-size: 2em;
+    font-family: 'Press Start 2P', cursive;
+    transition: 1s all;
+    transform: scale(150%);
+}
+
 @media screen and (max-width:580px){
     .box1{
         width: 350px;
